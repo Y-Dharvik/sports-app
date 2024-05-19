@@ -2,7 +2,6 @@
 import { useState, useContext, Fragment } from 'react'
 import { Disclosure, Menu, Transition, Switch } from '@headlessui/react'
 import { UserCircleIcon } from '@heroicons/react/24/outline'
-import Logo from "../../assets/images/logo.png"
 import { Link, useLocation } from "react-router-dom"
 import { ThemeContext } from "../../context/theme";
 
@@ -45,7 +44,7 @@ const Appbar = () => {
                 <div className="flex-shrink-0">
                     <img
                     className="h-8"
-                    src={Logo}
+                    src={'../../assets/logo.png'}
                     alt="Smarter Tasks"
                   />
                 </div>

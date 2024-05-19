@@ -3,7 +3,6 @@
 import { Disclosure } from "@headlessui/react";
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../assets/logo.png"
 const Landing: React.FC = () => {
     const navigation = [
         { name: "Sign in", href: "/signin" },
@@ -20,7 +19,7 @@ const Landing: React.FC = () => {
                                 <div className="flex-shrink-0">
                                     <img
                                         className="h-12 w-12 sm:h-14 sm:w-14 mr-2"
-                                        src={Logo}
+                                        src={'../../assets/logo.png'}
                                         alt="Smarter Tasks"
                                     />
                                 </div>
