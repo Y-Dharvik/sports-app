@@ -10,6 +10,7 @@ export interface Sport {
 
   
 export interface Article{
+    content: string;
     id: number;
     title: string;
     thumbnail: string;

@@ -38,19 +38,20 @@ export default function MatchId(props : Props, State : Match) {
 
   return (
     <>
-      {match.isRunning && <div className='border-2 mx-2 mb-1 rounded border-red-400 p-2 bg-red-100'>
+      {<div className='border-2 mx-2 mb-1 rounded border-red-400 p-2 bg-red-100'>
          <div className=' flex justify-between w-48'>
            <h3 className='font-bold text-black-800'>{match.sportName}</h3>
            <ArrowPathIcon className="h-6 w-6 hover:rotate-90 transition-all ease-in-out" aria-hidden="true" onClick={()=> { fetchMatch(match.id)}}/>
          </div>
          <p className='text-sm text-gray-600'>{match.location}</p>
+          <p className='text-sm text-gray-600'>Date: {match.startsAt.slice(0,10)}</p>
          <div className='flex flex-col my-2'>
            <div className='flex justify-between mt-1'>
              <p className='font-semibold'>{match.teams[0].name}</p>
              <p className='font-semibold'>{match.score[match.teams[0].name]}</p>
            </div>
            <div className='flex justify-between'>
-             <p className='font-semibold'>{match.teams[0].name}</p>
+             <p className='font-semibold'>{match.teams[1].name}</p>
              <p className='font-semibold'>{match.score[match.teams[1].name]}</p>
            </div>
          </div>
