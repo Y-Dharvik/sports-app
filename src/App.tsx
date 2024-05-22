@@ -2,6 +2,8 @@ import { RouterProvider } from "react-router-dom";
 import Router from "./routes";
 import { ThemeContext } from "./context/theme";
 import { Suspense, useContext } from "react";
+import { MatchesProvider } from "./context/matches/context";
+import { ArticlesProvider } from "./context/articles/context";
 
 const App = () => {
   const { theme } = useContext(ThemeContext);
@@ -11,7 +13,11 @@ const App = () => {
     >
       
             <Suspense fallback={<>Loading...</>}>
+              <MatchesProvider>
+              <ArticlesProvider>
               <RouterProvider router={Router} />
+              </ArticlesProvider>
+              </MatchesProvider>
             </Suspense>
           
     </div>

@@ -1,7 +1,7 @@
 // src/pages/signup/SignupForm.tsx
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { API_ENDPOINT } from "../../config/constants";
 
 type Inputs = {
@@ -15,7 +15,7 @@ const SignupForm: React.FC = () => {
     register,
     handleSubmit,
   } = useForm<Inputs>();
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const onSubmit: SubmitHandler<Inputs> = async (parm) => {
     try {
       const { Name, userEmail, userPassword } = parm;
@@ -39,7 +39,7 @@ const SignupForm: React.FC = () => {
       // if successful, save the user info in localStorage
       localStorage.setItem("userData", JSON.stringify(data.user));
       // redirect to the signin page using the navigate function
-      //navigate("/account");
+      navigate("/account");
     } catch (error) {
       console.error("Sign-up failed:", error);
     }

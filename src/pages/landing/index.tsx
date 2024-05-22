@@ -19,8 +19,8 @@ const Landing: React.FC = () => {
                                 <div className="flex-shrink-0">
                                     <img
                                         className="h-12 w-12 sm:h-14 sm:w-14 mr-2"
-                                        src={'../../assets/logo.png'}
-                                        alt="Smarter Tasks"
+                                        src='../../assets/logo.png'
+                                        alt="Sports App"
                                     />
                                 </div>
                             </div>
