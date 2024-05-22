@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useContext } from "react";
 import { Disclosure, Switch } from "@headlessui/react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ThemeContext } from "../../context/theme";
 import LiveMatch from "../../components/Matches";
 import Articles from "../../components/Articles";
-const classNames = (...classes: string[]): string =>
-  classes.filter(Boolean).join(" ");
+// const classNames = (...classes: string[]): string =>
+//   classes.filter(Boolean).join(" ");
 
 const Appbar = () => {
   const { theme, setTheme } = useContext(ThemeContext);
   const [enabled, setEnabled] = useState(theme === "dark");
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
 
   const toggleTheme = () => {
     let newTheme = "";

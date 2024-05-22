@@ -37,6 +37,13 @@ export default function MatchId(props : Props, State : Match) {
   }, [props.id]);
 
   return (
+    // <>
+    // <div className='border-2 mx-2 mb-1 rounded border-red-400 p-2 bg-red-100'>
+    // <div className=' flex justify-between w-48'>
+    //   {match.sportName}
+    // </div>
+    // </div>
+    // </>
     <>
       {<div className='border-2 mx-2 mb-1 rounded border-red-400 p-2 bg-red-100'>
          <div className=' flex justify-between w-48'>
