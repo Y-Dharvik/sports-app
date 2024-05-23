@@ -50,7 +50,7 @@ export default function ArticleId() {
   
 
   // console.log("article in Article.tsx articlee: ", articlee.date);
-  const [openRead, setOpenRead] = useState(false);
+  const [, setOpenRead] = useState(false);
   function closeModal() {
     setOpenRead(false);
     navigate("../../");
