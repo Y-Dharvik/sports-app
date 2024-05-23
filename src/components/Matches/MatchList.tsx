@@ -3,7 +3,6 @@ import { useMatchesDispatch } from '../../context/matches/context'
 import { fetchMatches } from '../../context/matches/action'
 import { useEffect } from 'react'
 import { ArrowPathIcon } from '@heroicons/react/24/outline'
-import MatchId from './Match.tsx'
 
 
 export default function LiveMatchList() {

@@ -3,7 +3,6 @@ import { useArticlesDispatch } from "../../context/articles/context";
 import { fetchArticles } from "../../context/articles/action";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import ArticleId from "./Article.tsx";
 
 export default function ArticleList() {
   const articleDispatch = useArticlesDispatch();
