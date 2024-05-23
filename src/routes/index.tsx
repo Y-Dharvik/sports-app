@@ -1,20 +1,14 @@
-import React from "react";
+import React, { Children } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
 // import Notfound from "../pages/Notfound";
-// import ProjectContainer from "../pages/projects";
 
-//import Signin from "../pages/signin"
-//import Signup from "../pages/signup"
-//import Projects from "../pages/projects"
-//import Members from "../pages/members"
-// import Logout from "../pages/logout";
+
 import Notfound from "../pages/Notfound";
-// import ProjectDetails from "../pages/project_details";
-// import NewTask from "../pages/tasks/NewTask";
-// import TaskDetailsContainer from "../pages/tasks/TaskDetailsContainer";
-
+import LiveMatch from "../components/Matches";
+import Articles from "../components/Articles";
+import ArticleId from "../components/Articles/Article";
 const Signin = React.lazy(() => import("../pages/signin"));
 const Signup = React.lazy(() => import("../pages/signup"));
 const AccountLayout = React.lazy(() => import("../layout/account"));
@@ -66,6 +60,13 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     ErrorBoundary: () => <>Failed to load the page</>,
+    children: [
+      {
+        path: "articles/:articleId",
+        element: <ArticleId />
+      }
+
+    ],
     
   },
 //       {
@@ -78,10 +79,10 @@ const router = createBrowserRouter([
     path: "/notfound",
     element: <Notfound />
   },
-  {
-    path: "*",
-    element: <Navigate to="/notfound" replace />
-  }
+  // {
+  //   path: "*",
+  //   element: <Navigate to="/notfound" replace />
+  // }
 ]);
 
 export default router;
