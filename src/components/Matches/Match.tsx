@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ArrowPathIcon } from '@heroicons/react/24/outline'
+// import { ArrowPathIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom'
 import { API_ENDPOINT } from '../../config/constants'
 import { Match } from '../../context/matches/types.ts'
