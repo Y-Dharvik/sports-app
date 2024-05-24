@@ -34,7 +34,7 @@ export default function ArticleList() {
   // );
 
   return (
-    <div className="auto flex grid-cols-3 gap-2 p-2 lg:grid container mx-auto rounded-lg bg-gray-100">
+    <div className="auto flex grid-cols-3 gap-2 p-2 lg:grid container mx-auto rounded-lg bg-orange-200">
       {articles.map((article: any) => {
         return (
           <div className="flex-auto flex justify-center">

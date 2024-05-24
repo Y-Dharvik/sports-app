@@ -8,6 +8,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Notfound from "../pages/Notfound";
 
 import ArticleId from "../components/Articles/Article";
+import MatchId from "../components/Matches/Match";
 const Signin = React.lazy(() => import("../pages/signin"));
 const Signup = React.lazy(() => import("../pages/signup"));
 const AccountLayout = React.lazy(() => import("../layout/account"));
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "articles/:articleId",
         element: <ArticleId />
+      }, 
+      {
+        path: "matches/:matchId",
+        element: <MatchId />
       }
 
     ],
@@ -78,10 +83,10 @@ const router = createBrowserRouter([
     path: "/notfound",
     element: <Notfound />
   },
-  // {
-  //   path: "*",
-  //   element: <Navigate to="/notfound" replace />
-  // }
+  {
+    path: "*",
+    element: <Navigate to="/notfound" replace />
+  }
 ]);
 
 export default router;

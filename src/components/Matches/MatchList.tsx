@@ -3,6 +3,7 @@ import { useMatchesDispatch } from '../../context/matches/context'
 import { fetchMatches } from '../../context/matches/action'
 import { useEffect } from 'react'
 import { ArrowPathIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom'
 
 
 export default function LiveMatchList() {
@@ -51,6 +52,7 @@ export default function LiveMatchList() {
         {matches.map((match: any) => {
           return (
             <div className='border-2 mx-2 mb-1 rounded border-red-400 p-2 bg-red-100'>
+               <Link to={`/account/matches/${match.id}`}>
          <div className=' flex justify-between w-48'>
            <h3 className='font-bold text-black-800'>{match.name}</h3>
            <ArrowPathIcon className="h-6 w-6 hover:rotate-90 transition-all ease-in-out" aria-hidden="true"/>
@@ -67,6 +69,7 @@ export default function LiveMatchList() {
              <p className='font-semibold'>{match.score[match.teams[1].name]}</p>
            </div>
          </div> */}
+         </Link>
        </div>
           )
         })}
