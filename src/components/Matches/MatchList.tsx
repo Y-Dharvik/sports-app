@@ -1,7 +1,8 @@
 import { useMatchesState } from '../../context/matches/context'
 import { useMatchesDispatch } from '../../context/matches/context'
 import { fetchMatches } from '../../context/matches/action'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { FunnelIcon } from '@heroicons/react/24/outline'
 import { ArrowPathIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 
@@ -12,7 +13,29 @@ export default function LiveMatchList() {
     fetchMatches(matchDispatch)
   }, [matchDispatch])
   const state = useMatchesState()
-  const { matches, isLoading, isError, errorMessage } = state
+  const { matches, isLoading, isError, errorMessage } = state;
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const categories = [
+    "All",
+    "Basketball",
+    "American Football",
+    "Rugby",
+    "Field Hockey",
+    "Table Tennis",
+    "Cricket"
+  ];
+
+  const handleCategoryChange = (category:any) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredMatches = selectedCategory === "All" 
+    ? matches 
+    : matches.filter(matches => matches.sportName.toLowerCase() === selectedCategory.toLowerCase());
+  if (matches.length === 0 && isLoading) {
+    return <span>Loading...</span>;
+  }
   console.log("matches: ",matches);
 
   if (matches.length === 0 && isLoading) {
@@ -47,9 +70,30 @@ export default function LiveMatchList() {
     //   })}
     //   </div>
     // </div>
+    <div className="container mx-auto">
+      <div className="flex justify-end w-11/12 mx-auto my-4">
+        <select
+          name=""
+          id=""
+          className="justify-between py-2 px-5 text-orange-600 bg-grey-400 rounded-lg"
+        >
+        {categories.map(category => (
+          <option 
+            key={category} 
+            onClick={() => handleCategoryChange(category)}
+            className={category === selectedCategory ? "active bg-slate-500 hover:bg-gray-400 dark:bg-blue-500 p-2 rounded-md hover:bg-blue-400" : "p-2 rounded-md bg-slate-300 hover:bg-gray-400 dark:hover:bg-blue-400 bg-slate-800"}
+          >
+            {category}
+          </option>
+        ))}
+        </select>
+        <div className="bg-gray-300 rounded-lg mx-2 p-3 text-black-600">
+              <FunnelIcon className="h-4 w-4" />
+            </div>
+      </div>
     <div className="flex flex-row overflow-x-auto w-full p-4 bg-gray-100">
       <div className="flex flex-row">
-        {matches.map((match: any) => {
+        {filteredMatches.map((match: any) => {
           return (
             <div className='border-2 mx-2 mb-1 rounded border-red-400 p-2 bg-red-100'>
                <Link to={`/account/matches/${match.id}`}>
@@ -74,6 +118,7 @@ export default function LiveMatchList() {
           )
         })}
       </div>
+    </div>
     </div>
   )
 }

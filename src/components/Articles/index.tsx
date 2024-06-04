@@ -13,7 +13,7 @@ export default function Articles() {
 
   return (
     <div>
-      <h1 className="text-gray-900 font-bold text-xl">Articles</h1>
+      <h1 className="text-gray-900 font-bold mb-2 mt-4 ml-2 text-2xl">Articles</h1>
       <div className="mt-2 justify-between flex items-center w-full">
         <ArticleList />
       </div>
