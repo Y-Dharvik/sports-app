@@ -63,14 +63,15 @@ export default function LiveMatchList() {
     filteredMatches = matches;
   } else if (selectedCategory === "Prefered Matches") {
     filteredMatches = matches.filter((match: Match) => {
-      let ans1 = preferences.preferredTeams.includes(
+      // console.log("preferences: ", preferences);
+      let ans1 = preferences.preferences.selectedTeams.includes(
         match.teams[0].name || match.teams[1].name
       );
       let ans2 =
         match.teams.length > 1
-          ? preferences.preferredTeams.includes(match.teams[1].name)
+          ? preferences.preferences.selectedTeams.includes(match.teams[1].name)
           : false;
-      let ans3 = preferences.preferredSport.includes(match.sportName);
+      let ans3 = preferences.preferences.selectedSports.includes(match.sportName);
       return ans1 || ans2 || ans3;
       // || preferences.preferredSport.includes(match.sportName);
     });

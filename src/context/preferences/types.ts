@@ -1,7 +1,9 @@
 
 export interface UserPreferences {
-	preferredSport: string[];
-	preferredTeams: string[];
+	preferences: {
+		selectedTeams: string[],
+		selectedSports: string[]
+	}
 }
 
 export interface PreferencesState {
@@ -12,10 +14,10 @@ export interface PreferencesState {
 }
 
 export const initialPreferencesState: PreferencesState = {
-	preferences: {
-	  preferredSport: [],
-	  preferredTeams: [],
-	},
+	preferences: {preferences: {
+		selectedTeams: [],
+		selectedSports: []
+	}},
 	isLoading: false,
 	isError: false,
 	errorMessage: "",

@@ -64,9 +64,9 @@ export default function ArticleList(){
       if(article.teams.length !== 0){
         // console.log("article.teams[0].name: ", article.teams[0].name);
         // console.log("article.teams[1].name: ", article.teams[1].name);
-        let ans1 = preferences.preferredTeams.includes(article.teams[0].name || article.teams[1].name)
-        let ans2 = (article.teams.length > 1) ? preferences.preferredTeams.includes(article.teams[1].name) : false
-        let ans3 = preferences.preferredSport.includes(article.sport.name)
+        let ans1 = preferences.preferences.selectedTeams.includes(article.teams[0].name || article.teams[1].name)
+        let ans2 = (article.teams.length > 1) ? preferences.preferences.selectedTeams.includes(article.teams[1].name) : false
+        let ans3 = preferences.preferences.selectedSports.includes(article.sport.name)
         // the culmination of all these articles combined to give the final answer
         return ans1 || ans2 || ans3
       }
@@ -79,11 +79,11 @@ export default function ArticleList(){
     })
   }
 
-  if(selectedSort === "Date"){
+  if(selectedSort === "Sort By: Date"){
     filteredArticles.sort((a: any, b: any) => {
       return a.date - b.date;
     })
-  }else if(selectedSort === "Title"){
+  }else if(selectedSort === "Sort By: Title"){
     filteredArticles.sort((a: any, b: any) => {
       return a.title.localeCompare(b.title);
     })

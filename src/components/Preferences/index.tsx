@@ -11,7 +11,8 @@ import { fetchSports } from "../../context/sports/action";
 import { fetchTeams } from "../../context/teams/action";
 import { useSportDispatch } from "../../context/sports/context";
 import { useTeamsDispatch } from "../../context/teams/context";
-import { initialPreferencesState } from "../../context/preferences/types";
+import { UserPreferences, initialPreferencesState } from "../../context/preferences/types";
+import { set } from "react-hook-form";
 
 export default function Preferences() {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ export default function Preferences() {
 
   let [teamsState, setTeamsState] = useState<any>([])
 
-  let [userPreferences, setUserPreferences] = useState<any>(initialPreferencesState.preferences)
+  let [userPreferences, setUserPreferences] = useState<UserPreferences>(initialPreferencesState.preferences)
 
   const preferencesDispatch = usePreferencesDispatch();
   // console.log("preferences: ",preferences)
@@ -72,27 +73,31 @@ export default function Preferences() {
   if(userPreferences===null && sportsState.length>0 && teamsState.length>0){
     setUserPreferences(preferences)
   }
+  console.log("userPreferences: ",userPreferences)
 
-  const handleSportChange = (e: any) => {
+  const handleSportChange = async (e: any) => {
     let sport = e.target.value
     let newPreferences = userPreferences
     if(e.target.checked){
-      newPreferences.preferredSport.push(sport)
+      newPreferences.preferences.selectedSports.push(sport)
     }else{
-      newPreferences.preferredSport = newPreferences.preferredSport.filter((item: string) => item !== sport)
+      newPreferences.preferences.selectedSports = newPreferences.preferences.selectedSports.filter((item: string) => item !== sport)
     }
     setUserPreferences(newPreferences)
+    setPreferences(preferencesDispatch, userPreferences)
   }
 
-  const handleTeamChange = (e: any) => {
+  const handleTeamChange = async (e: any) => {
+
     let team = e.target.value
     let newPreferences = userPreferences
     if(e.target.checked){
-      newPreferences.preferredTeams.push(team)
+      newPreferences.preferences.selectedTeams.push(team)
     }else{
-      newPreferences.preferredTeams = newPreferences.preferredTeams.filter((item: string) => item !== team)
+      newPreferences.preferences.selectedTeams = newPreferences.preferences.selectedTeams.filter((item: string) => item !== team)
     }
     setUserPreferences(newPreferences)
+    setPreferences(preferencesDispatch, userPreferences)
   }
 
   const handleSubmit = () => {
@@ -155,7 +160,7 @@ export default function Preferences() {
                               className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                               onChange={handleSportChange}
                               value={sport.name}
-                              checked={userPreferences.preferredSport.includes(sport.name)}
+                              checked={userPreferences.preferences.selectedSports.includes(sport.name)}
                             />
                           </div>
                           < div className="ml-3 text-sm">
@@ -182,7 +187,7 @@ export default function Preferences() {
                               className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                               onChange={handleTeamChange}
                               value={team.name}
-                              checked={userPreferences.preferredTeams.includes(team.name)}
+                              checked={userPreferences.preferences.selectedTeams.includes(team.name)}
                             />
                           </div>
                           <div className="ml-3 text-sm">

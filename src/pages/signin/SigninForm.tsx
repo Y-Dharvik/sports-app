@@ -28,7 +28,7 @@ const SigninForm: React.FC = () => {
     try {
       const response = await fetch(`${API_ENDPOINT}/users/sign_in`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",},
         body: JSON.stringify({ email, password }),
       });
 
@@ -42,8 +42,10 @@ const SigninForm: React.FC = () => {
       const data = await response.json();
 
       // After successful signin, first we will save the token in localStorage
-      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("authToken", data.auth_token);
       localStorage.setItem("userData", JSON.stringify(data.user));
+      console.log("data.token: ", data.auth_token);
+      console.log("authToken: ", localStorage.getItem("authToken"));
       // redirect to the dashboard page using the navigate function
       navigate("/account");
     } catch (error) {

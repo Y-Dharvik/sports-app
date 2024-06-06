@@ -1,4 +1,5 @@
 import { API_ENDPOINT } from "../../config/constants";
+import { UserPreferences } from "./types";
 
 
 export const fetchPreferences = async (dispatch: any) => {
@@ -6,7 +7,9 @@ export const fetchPreferences = async (dispatch: any) => {
 		dispatch({ type: "FETCH_PREFERENCES_REQUEST" });
 		const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
 			method: "GET",
-			headers: { "Content-Type": "application/json" },
+			headers: { "Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("authToken")}`
+			 },
 		});
 
 		if (!response.ok) {
@@ -22,15 +25,18 @@ export const fetchPreferences = async (dispatch: any) => {
 	}
 }
 
-export const setPreferences = async (dispatch: any, preferences: any) => {
+export const setPreferences = async (dispatch: any, preferences: UserPreferences) => {
 	try {
 		dispatch({ type: "SET_PREFERENCES_REQUEST" });
 		const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			method: "PATCH",
+			headers: { "Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("authToken")}`
+			 },
 			body: JSON.stringify(preferences),
 		});
-
+		console.log("JSON.stringify(preferences):", JSON.stringify(preferences));
+		console.log("response:", response);
 		if (!response.ok) {
 			throw new Error("Failed to set preferences");
 		}
