@@ -6,6 +6,7 @@ import { fetchPreferences } from '../../context/preferences/action'
 import { useEffect, useState } from "react";
 import { FunnelIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import { Article } from "../../context/articles/types";
 
 export default function ArticleList(){
   const articleDispatch = useArticlesDispatch();
@@ -25,33 +26,75 @@ export default function ArticleList(){
 
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const categories = [
-    "All",
-    "Prefered Articles",
-    "Basketball",
-    "American Football",
-    "Rugby",
-    "Field Hockey",
-    "Table Tennis",
-    "Cricket"
-  ];
-
-  const handleCategoryChange = (category:any) => {
-    setSelectedCategory(category);
-  };
+  const authenticated = !!localStorage.getItem("authToken");
+  if(authenticated){
+    var categories = [
+      "All",
+      "Prefered Articles",
+      "Basketball",
+      "American Football",
+      "Rugby",
+      "Field Hockey",
+      "Table Tennis",
+      "Cricket"
+    ];
+  }else{
+    var categories = [
+      "All",
+      "Basketball",
+      "American Football",
+      "Rugby",
+      "Field Hockey",
+      "Table Tennis",
+      "Cricket"
+    ];
+  }
 
   let filteredArticles;
    if(selectedCategory === "All" ){
     filteredArticles = articles;
    }else if(selectedCategory === "Prefered Articles"){
-    filteredArticles = articles.filter((article : any) => {
-      return preferences.preferredSport.includes(article.sport.name) || preferences.preferredTeams.includes(article.teams.name);
+    filteredArticles = articles.filter((article : Article) => {
+      console.log("article.teams: ", article.teams);
+      if(article.teams.length !== 0){
+        // console.log("article.teams[0].name: ", article.teams[0].name);
+        // console.log("article.teams[1].name: ", article.teams[1].name);
+        let ans1 = preferences.preferredTeams.includes(article.teams[0].name || article.teams[1].name)
+        let ans2 = (article.teams.length > 1) ? preferences.preferredTeams.includes(article.teams[1].name) : false
+        let ans3 = preferences.preferredSport.includes(article.sport.name)
+        // the culmination of all these articles combined to give the final answer
+        return ans1 || ans2 || ans3
+      }
+      // console.log("article.teams.name: ", article.teams[0].name);
+      // || preferences.preferredSport.includes(article.sport.name)
     })
   }else{
     filteredArticles = articles.filter((article : any) => {
       return article.sport.name === selectedCategory;
     })
   }
+
+  const handleCategoryChange = (category:any) => {
+    setSelectedCategory(category);
+    // if(selectedCategory === "All" ){
+    //   filteredArticles = articles;
+    //  }else if(selectedCategory === "Prefered Articles"){
+    //   filteredArticles = articles.filter((article : Article) => {
+    //     console.log("article.teams[0].name: ", article.teams[0].name);
+    //     console.log("article.teams[1].name: ", article.teams[1].name);
+    //     return preferences.preferredTeams.includes(article.teams[0].name || article.teams[1].name) 
+    //     // || preferences.preferredSport.includes(article.sport.name)
+    //   })
+    // }else{
+    //   filteredArticles = articles.filter((article : any) => {
+    //     return article.sport.name === selectedCategory;
+    //   })
+    // }
+  };
+
+  // console.log("preferences.preferredTeams: ", preferences.preferredTeams);
+  // console.log("articles: ", articles);
+  // console.log("filteredArticles: ", filteredArticles);
 
   if (articles.length === 0 && isLoading) {
     return <span>Loading...</span>;

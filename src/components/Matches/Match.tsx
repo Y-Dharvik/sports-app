@@ -51,7 +51,7 @@ export default function MatchId() {
   const [, setOpenRead] = useState(false);
   function closeModal() {
     setOpenRead(false);
-    navigate("../../");
+    navigate("../");
   }
 
   // return (

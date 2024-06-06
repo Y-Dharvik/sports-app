@@ -53,7 +53,7 @@ export default function ArticleId() {
   const [, setOpenRead] = useState(false);
   function closeModal() {
     setOpenRead(false);
-    navigate("../../");
+    navigate("../");
   }
 
   return (

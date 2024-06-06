@@ -32,7 +32,7 @@ export default function Preferences() {
 
   const sportsList = useSportState();
   const { sports} = sportsList;
-  console.log("sports after: ",sports)
+  // console.log("sports after: ",sports)
   const teamsList = useTeamsState();
   const { teams } = teamsList;
   const prefs = usePreferencesState();
@@ -52,8 +52,8 @@ export default function Preferences() {
   let [userPreferences, setUserPreferences] = useState<any>(initialPreferencesState.preferences)
 
   const preferencesDispatch = usePreferencesDispatch();
-  console.log("preferences: ",preferences)
-  console.log("sports after after: ",sports)  
+  // console.log("preferences: ",preferences)
+  // console.log("sports after after: ",sports)  
   if(sports.length>0 && sportsState.length===0){
     setSportsState(sports)
   }
@@ -66,8 +66,8 @@ export default function Preferences() {
     setUserPreferences(preferences)
   },[preferences])
 
-  console.log("sportsState: ",sportsState)
-  console.log("teamsState: ",teamsState)
+  // console.log("sportsState: ",sportsState)
+  // console.log("teamsState: ",teamsState)
 
   if(userPreferences===null && sportsState.length>0 && teamsState.length>0){
     setUserPreferences(preferences)

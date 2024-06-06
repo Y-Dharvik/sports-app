@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { FunnelIcon } from '@heroicons/react/24/outline'
 import { ArrowPathIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
+import { Match } from '../../context/matches/types'
 
 
 export default function LiveMatchList() {
@@ -24,16 +25,29 @@ export default function LiveMatchList() {
   const { preferences } = preferencesState;
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const categories = [
-    "All",
-    "Prefered Matches",
-    "Basketball",
-    "American Football",
-    "Rugby",
-    "Field Hockey",
-    "Table Tennis",
-    "Cricket"
-  ];
+  const authenticated = !!localStorage.getItem("authToken");
+  if(authenticated){
+    var categories = [
+      "All",
+      "Prefered Matches",
+      "Basketball",
+      "American Football",
+      "Rugby",
+      "Field Hockey",
+      "Table Tennis",
+      "Cricket"
+    ];
+  }else{
+    var categories = [
+      "All",
+      "Basketball",
+      "American Football",
+      "Rugby",
+      "Field Hockey",
+      "Table Tennis",
+      "Cricket"
+    ];
+  }
 
   const handleCategoryChange = (category:any) => {
     setSelectedCategory(category);
@@ -46,8 +60,13 @@ export default function LiveMatchList() {
   if(selectedCategory === "All" ){
     filteredMatches = matches;
   }else if(selectedCategory === "Prefered Matches"){
-    filteredMatches = matches.filter((match : any) => {
-      return  preferences.preferredTeams.includes(match.teams.name) || preferences.preferredSport.includes(match.sportName);
+    filteredMatches = matches.filter((match : Match) => {
+      let ans1 = preferences.preferredTeams.includes(match.teams[0].name || match.teams[1].name)
+      let ans2 = (match.teams.length > 1) ? preferences.preferredTeams.includes(match.teams[1].name) : false
+      let ans3 = preferences.preferredSport.includes(match.sportName)
+      // the culmination of all these articles combined to give the final answer
+      return ans1 || ans2 || ans3
+      // || preferences.preferredSport.includes(match.sportName);
     })
   }
   else{
