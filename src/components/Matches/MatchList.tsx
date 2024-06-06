@@ -1,6 +1,7 @@
-import { useMatchesState } from '../../context/matches/context'
-import { useMatchesDispatch } from '../../context/matches/context'
+import { useMatchesState, useMatchesDispatch } from '../../context/matches/context'
 import { fetchMatches } from '../../context/matches/action'
+import { usePreferencesState, usePreferencesDispatch } from '../../context/preferences/context'
+import { fetchPreferences } from '../../context/preferences/action'
 import { useEffect, useState } from 'react'
 import { FunnelIcon } from '@heroicons/react/24/outline'
 import { ArrowPathIcon } from '@heroicons/react/24/outline'
@@ -14,10 +15,18 @@ export default function LiveMatchList() {
   }, [matchDispatch])
   const state = useMatchesState()
   const { matches, isLoading, isError, errorMessage } = state;
+
+  const preferenceDispatch = usePreferencesDispatch();
+  useEffect(() => {
+    fetchPreferences(preferenceDispatch);
+  }, [preferenceDispatch]);
+  const preferencesState = usePreferencesState();
+  const { preferences } = preferencesState;
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const categories = [
     "All",
+    "Prefered Matches",
     "Basketball",
     "American Football",
     "Rugby",
@@ -30,17 +39,30 @@ export default function LiveMatchList() {
     setSelectedCategory(category);
   };
 
-  const filteredMatches = selectedCategory === "All" 
-    ? matches 
-    : matches.filter(matches => matches.sportName.toLowerCase() === selectedCategory.toLowerCase());
+  // prefered matches should fetch the prefences and filter the matches based on the preferences
+  
+
+  let filteredMatches;
+  if(selectedCategory === "All" ){
+    filteredMatches = matches;
+  }else if(selectedCategory === "Prefered Matches"){
+    filteredMatches = matches.filter((match : any) => {
+      return  preferences.preferredTeams.includes(match.teams.name) || preferences.preferredSport.includes(match.sportName);
+    })
+  }
+  else{
+    filteredMatches = matches.filter((match : any) => {
+      return match.sportName === selectedCategory;
+    })
+  }
   if (matches.length === 0 && isLoading) {
     return <span>Loading...</span>;
   }
   console.log("matches: ",matches);
 
-  if (matches.length === 0 && isLoading) {
-    return <span>Loading...</span>;
-  }
+  // if ((matches.length === 0 || filteredMatches.length === 0) && !isLoading) {
+  //   return <span>No matches available</span>;
+  // }
 
   if (isError) {
     return <span>{errorMessage}</span>;
@@ -92,6 +114,7 @@ export default function LiveMatchList() {
             </div>
       </div>
     <div className="flex flex-row overflow-x-auto w-full p-4 bg-gray-100">
+      {filteredMatches.length === 0 && <span>No matches available</span>}
       <div className="flex flex-row">
         {filteredMatches.map((match: any) => {
           return (

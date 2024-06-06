@@ -5,7 +5,7 @@ import {
 } from "./reducer";
 import { initialPreferencesState, PreferencesState } from "./types";
 
-const PreferencesStateContext = createContext<PreferencesState | undefined>(undefined);
+const PreferencesStateContext = createContext<PreferencesState>(initialPreferencesState);
 
 const PreferencesDispatchContext = createContext< React.Dispatch<PreferencesActions> | undefined>(undefined);
 

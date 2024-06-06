@@ -30,6 +30,7 @@ const Appbar = () => {
     navigation = [
       { name: "Profile", href: "/profile", current: false },
       { name: "Sign out", href: "/logout", current: false },
+      { name : "Preferences", href: "/account/preferences", current: false}
     ];
   }else{
     navigation = [

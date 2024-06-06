@@ -1,6 +1,8 @@
 import { useArticlesState } from "../../context/articles/context";
 import { useArticlesDispatch } from "../../context/articles/context";
 import { fetchArticles } from "../../context/articles/action";
+import { usePreferencesState, usePreferencesDispatch } from '../../context/preferences/context'
+import { fetchPreferences } from '../../context/preferences/action'
 import { useEffect, useState } from "react";
 import { FunnelIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
@@ -13,10 +15,19 @@ export default function ArticleList(){
 
   const state = useArticlesState();
   const { articles, isLoading, isError, errorMessage } = state;
+
+  const preferenceDispatch = usePreferencesDispatch();
+  useEffect(() => {
+    fetchPreferences(preferenceDispatch);
+  }, [preferenceDispatch]);
+  const preferencesState = usePreferencesState();
+  const { preferences } = preferencesState;
+
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const categories = [
     "All",
+    "Prefered Articles",
     "Basketball",
     "American Football",
     "Rugby",
@@ -29,9 +40,19 @@ export default function ArticleList(){
     setSelectedCategory(category);
   };
 
-  const filteredArticles = selectedCategory === "All" 
-    ? articles 
-    : articles.filter(article => article.sport.name.toLowerCase() === selectedCategory.toLowerCase());
+  let filteredArticles;
+   if(selectedCategory === "All" ){
+    filteredArticles = articles;
+   }else if(selectedCategory === "Prefered Articles"){
+    filteredArticles = articles.filter((article : any) => {
+      return preferences.preferredSport.includes(article.sport.name) || preferences.preferredTeams.includes(article.teams.name);
+    })
+  }else{
+    filteredArticles = articles.filter((article : any) => {
+      return article.sport.name === selectedCategory;
+    })
+  }
+
   if (articles.length === 0 && isLoading) {
     return <span>Loading...</span>;
   }
@@ -76,6 +97,7 @@ export default function ArticleList(){
       </div>
       
       <div className="auto flex grid-cols-3 gap-2 p-2 lg:grid container mx-auto rounded-lg bg-orange-200 my-4">
+        {filteredArticles.length === 0 && !isLoading && <span>No articles available</span>}
         {filteredArticles.map((article: any) => {
           return (
             <div className="flex-auto flex justify-center">

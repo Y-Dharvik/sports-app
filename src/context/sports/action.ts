@@ -14,7 +14,7 @@ export const fetchSports = async (dispatch: any) => {
 
         const data = await response.json();
 
-        dispatch({ type: "FETCH_SPORTS_SUCCESS", payload: data });
+        dispatch({ type: "FETCH_SPORTS_SUCCESS", payload: data.sports });
     }
     catch (error) {
         dispatch({ type: "FETCH_SPORTS_FAILURE", payload: "Unable to fetch sports" });
