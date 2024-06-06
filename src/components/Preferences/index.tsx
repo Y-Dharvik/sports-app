@@ -72,7 +72,7 @@ export default function Preferences() {
   if(userPreferences===null && sportsState.length>0 && teamsState.length>0){
     setUserPreferences(preferences)
   }
-  console.log("userPreferences: ",userPreferences)
+  // console.log("userPreferences: ",userPreferences)
 
   const handleSportChange = async (e: any) => {
     let sport = e.target.value

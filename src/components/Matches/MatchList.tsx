@@ -83,7 +83,7 @@ export default function LiveMatchList() {
   if (matches.length === 0 && isLoading) {
     return <span>Loading...</span>;
   }
-  console.log("matches: ", matches);
+  // console.log("matches: ", matches);
 
   if (isError) {
     return <span>{errorMessage}</span>;

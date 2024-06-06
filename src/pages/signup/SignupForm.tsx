@@ -34,7 +34,7 @@ const SignupForm: React.FC = () => {
       }
       // extract the response body as JSON data
       const data = await response.json();
-      console.log("data: ", data);
+      // console.log("data: ", data);
       localStorage.setItem("authToken", data.token);
       // if successful, save the user info in localStorage
       localStorage.setItem("userData", JSON.stringify(data.user));

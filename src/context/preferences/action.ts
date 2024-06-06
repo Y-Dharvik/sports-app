@@ -35,8 +35,8 @@ export const setPreferences = async (dispatch: any, preferences: UserPreferences
 			 },
 			body: JSON.stringify(preferences),
 		});
-		console.log("JSON.stringify(preferences):", JSON.stringify(preferences));
-		console.log("response:", response);
+		// console.log("JSON.stringify(preferences):", JSON.stringify(preferences));
+		// console.log("response:", response);
 		if (!response.ok) {
 			throw new Error("Failed to set preferences");
 		}

@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useArticlesDispatch } from "../../context/articles/context";
 import { fetchArticles } from "../../context/articles/action";
+import ErrorBoundary from '../ErrorBoundary'
+import { Suspense } from 'react'
 import ArticleList from "./ArticleList.tsx";
 
 export default function Articles() {
@@ -15,7 +17,11 @@ export default function Articles() {
     <div>
       <h1 className="text-gray-900 font-bold mb-2 mt-4 ml-2 text-2xl">Articles</h1>
       <div className="mt-2 justify-between flex items-center w-full">
-        <ArticleList />
+      <ErrorBoundary>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ArticleList />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </div>
   );

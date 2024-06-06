@@ -5,25 +5,20 @@ import ProtectedRoute from "./ProtectedRoute";
 // import Notfound from "../pages/Notfound";
 
 
-import Notfound from "../pages/Notfound";
+const Notfound = React.lazy(() => import("../pages/Notfound"));
 
-import ArticleId from "../components/Articles/Article";
-import MatchId from "../components/Matches/Match";
-import Score from "../components/Matches/score.tsx";
-import Preferences from "../components/Preferences/index.tsx";
-import Landing from "../pages/landing";
-import ChangePassword from "../components/Profile/index.tsx";
+const ArticleId = React.lazy(() => import("../components/Articles/Article.tsx"));
+const MatchId = React.lazy(() => import("../components/Matches/Match.tsx"));
+const Score = React.lazy(() => import("../components/Matches/score.tsx"));
+const Preferences = React.lazy(() => import("../components/Preferences/index.tsx"));
+const Landing = React.lazy(() => import("../pages/landing"));
+const ChangePassword = React.lazy(() => import("../components/Profile/index.tsx"));
 const Signin = React.lazy(() => import("../pages/signin"));
 const Signup = React.lazy(() => import("../pages/signup"));
 const AccountLayout = React.lazy(() => import("../layout/account"));
-// const Projects = React.lazy(() => import("../pages/projects"));
-// const Members = React.lazy(() => import("../pages/members"));
+
 const Logout = React.lazy(() => import("../pages/logout"));
-// const ProjectDetails = React.lazy(() => import("../pages/project_details"));
-// const NewTask = React.lazy(() => import("../pages/tasks/NewTask"));
-// const TaskDetailsContainer = React.lazy(
-//   () => import("../pages/tasks/TaskDetailsContainer")
-// );
+
 
 
 let authenticated = !!localStorage.getItem("authToken");

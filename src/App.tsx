@@ -12,19 +12,19 @@ const App = () => {
     <div
       className={`mx-auto h-screen flex flex-col px-4py-2 `}
     >
-      <Suspense fallback={<>Loading...</>}>
-        <TeamsProvider>
-          <SportProvider>
-            <PreferencesProvider>
-              <MatchesProvider>
-                <ArticlesProvider>
+      <TeamsProvider>
+        <SportProvider>
+          <PreferencesProvider>
+            <MatchesProvider>
+              <ArticlesProvider>
+                <Suspense fallback={<>Loading...</>}>
                   <RouterProvider router={Router} />
-                </ArticlesProvider>
-              </MatchesProvider>
-            </PreferencesProvider>
-          </SportProvider>
-        </TeamsProvider>
-      </Suspense>
+                </Suspense>
+              </ArticlesProvider>
+            </MatchesProvider>
+          </PreferencesProvider>
+        </SportProvider>
+      </TeamsProvider>
     </div>
   );
 };
