@@ -12,6 +12,7 @@ import MatchId from "../components/Matches/Match";
 import Score from "../components/Matches/score.tsx";
 import Preferences from "../components/Preferences/index.tsx";
 import Landing from "../pages/landing";
+import ChangePassword from "../components/Profile/index.tsx";
 const Signin = React.lazy(() => import("../pages/signin"));
 const Signup = React.lazy(() => import("../pages/signup"));
 const AccountLayout = React.lazy(() => import("../layout/account"));
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: "preferences",
         element: <Preferences />
+      },
+      {
+        path: "profile",
+        element: <><ChangePassword /></>
       }
 
     ],

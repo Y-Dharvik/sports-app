@@ -12,7 +12,6 @@ import { fetchTeams } from "../../context/teams/action";
 import { useSportDispatch } from "../../context/sports/context";
 import { useTeamsDispatch } from "../../context/teams/context";
 import { UserPreferences, initialPreferencesState } from "../../context/preferences/types";
-import { set } from "react-hook-form";
 
 export default function Preferences() {
   const navigate = useNavigate();

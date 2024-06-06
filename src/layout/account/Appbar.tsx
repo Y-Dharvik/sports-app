@@ -1,34 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState, useContext } from "react";
-import { Disclosure, Switch } from "@headlessui/react";
+import { Disclosure } from "@headlessui/react";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "../../context/theme";
 import LiveMatch from "../../components/Matches";
 import Articles from "../../components/Articles";
 // const classNames = (...classes: string[]): string =>
 //   classes.filter(Boolean).join(" ");
 
 const Appbar = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
-  const [enabled, setEnabled] = useState(theme === "dark");
-  // const { pathname } = useLocation();
-
-  const toggleTheme = () => {
-    let newTheme = "";
-    if (theme === "light") {
-      newTheme = "dark";
-    } else {
-      newTheme = "light";
-    }
-    setEnabled(!enabled);
-    setTheme(newTheme);
-  };
-
   const auth = !!localStorage.getItem("authToken");
   let navigation = [];
   if(auth){
     navigation = [
-      { name: "Profile", href: "/profile", current: false },
+      { name: "Profile", href: "/account/profile", current: false },
       { name: "Sign out", href: "/logout", current: false },
       { name : "Preferences", href: "/account/preferences", current: false}
     ];
@@ -79,20 +62,6 @@ const Appbar = () => {
                 </div>
               </div>
 
-
-
-              <Switch
-                checked={enabled}
-                onChange={toggleTheme}
-                className={`${enabled ? "bg-slate-400" : "bg-slate-700"}
-                  relative inline-flex h-[24px] w-[60px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
-              >
-                <span
-                  aria-hidden="true"
-                  className={`${enabled ? "translate-x-9" : "translate-x-0"}
-                    pointer-events-none inline-block h-[16px] w-[16px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
-                />
-              </Switch>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   {navigation.map((item) => (
