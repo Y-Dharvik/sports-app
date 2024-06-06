@@ -25,6 +25,7 @@ export default function ArticleList(){
   const { preferences } = preferencesState;
 
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedSort, setSelectedSort] = useState("Sort By: Date");
 
   const authenticated = !!localStorage.getItem("authToken");
   if(authenticated){
@@ -49,13 +50,17 @@ export default function ArticleList(){
       "Cricket"
     ];
   }
+  const sortCategories = [
+    "Sort By: Date",
+    "Sort By: Title",
+  ]
 
   let filteredArticles;
    if(selectedCategory === "All" ){
     filteredArticles = articles;
    }else if(selectedCategory === "Prefered Articles"){
     filteredArticles = articles.filter((article : Article) => {
-      console.log("article.teams: ", article.teams);
+      // console.log("article.teams: ", article.teams);
       if(article.teams.length !== 0){
         // console.log("article.teams[0].name: ", article.teams[0].name);
         // console.log("article.teams[1].name: ", article.teams[1].name);
@@ -73,6 +78,30 @@ export default function ArticleList(){
       return article.sport.name === selectedCategory;
     })
   }
+
+  if(selectedSort === "Date"){
+    filteredArticles.sort((a: any, b: any) => {
+      return a.date - b.date;
+    })
+  }else if(selectedSort === "Title"){
+    filteredArticles.sort((a: any, b: any) => {
+      return a.title.localeCompare(b.title);
+    })
+  }
+
+  const handleSortChange = (sort:any) => {
+    if(selectedSort === "Sort By: Date"){
+    filteredArticles.sort((a: any, b: any) => {
+      return a.date - b.date;
+    })
+  }else if(selectedSort === "Sort By: Title"){
+    filteredArticles.sort((a: any, b: any) => {
+      return a.title.localeCompare(b.title);
+    })
+  }
+    setSelectedSort(sort);
+  }
+
 
   const handleCategoryChange = (category:any) => {
     setSelectedCategory(category);
@@ -124,23 +153,48 @@ export default function ArticleList(){
           id=""
           className="justify-between py-2 px-5 text-orange-600 bg-grey-400 rounded-lg"
         >
-        {categories.map(category => (
-          <option 
-            key={category} 
-            onClick={() => handleCategoryChange(category)}
-            className={category === selectedCategory ? "active bg-slate-500 hover:bg-gray-400 dark:bg-blue-500 p-2 rounded-md hover:bg-blue-400" : "p-2 rounded-md bg-slate-300 hover:bg-gray-400 dark:hover:bg-blue-400 bg-slate-800"}
-          >
-            {category}
-          </option>
-        ))}
+          {categories.map((category) => (
+            <option
+              key={category}
+              onClick={() => handleCategoryChange(category)}
+              className={
+                category === selectedCategory
+                  ? "active bg-slate-500 hover:bg-gray-400 dark:bg-blue-500 p-2 rounded-md hover:bg-blue-400"
+                  : "p-2 rounded-md bg-slate-300 hover:bg-gray-400 dark:hover:bg-blue-400 bg-slate-800"
+              }
+            >
+              {category}
+            </option>
+          ))}
+        </select>
+        <select
+          name=""
+          id=""
+          className="justify-between py-2 px-5 text-orange-600 bg-grey-400 rounded-lg"
+        >
+          {sortCategories.map((sortCategory) => (
+            <option
+              key={sortCategory}
+              onClick={() => handleSortChange(sortCategory)}
+              className={
+                sortCategory === selectedSort
+                  ? "active bg-slate-500 hover:bg-gray-400 dark:bg-blue-500 p-2 rounded-md hover:bg-blue-400"
+                  : "p-2 rounded-md bg-slate-300 hover:bg-gray-400 dark:hover:bg-blue-400 bg-slate-800"
+              }
+            >
+              {sortCategory}
+            </option>
+          ))}
         </select>
         <div className="bg-gray-300 rounded-lg mx-2 p-3 text-black-600">
-              <FunnelIcon className="h-4 w-4" />
-            </div>
+          <FunnelIcon className="h-4 w-4" />
+        </div>
       </div>
-      
+
       <div className="auto flex grid-cols-3 gap-2 p-2 lg:grid container mx-auto rounded-lg bg-orange-200 my-4">
-        {filteredArticles.length === 0 && !isLoading && <span>No articles available</span>}
+        {filteredArticles.length === 0 && !isLoading && (
+          <span>No articles available</span>
+        )}
         {filteredArticles.map((article: any) => {
           return (
             <div className="flex-auto flex justify-center">
