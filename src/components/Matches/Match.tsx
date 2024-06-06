@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-// import { ArrowPathIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom'
 import { API_ENDPOINT } from '../../config/constants'
 import { Match } from '../../context/matches/types.ts'
@@ -54,36 +53,6 @@ export default function MatchId() {
     navigate("../");
   }
 
-  // return (
-  //   // <>
-  //   // <div className='border-2 mx-2 mb-1 rounded border-red-400 p-2 bg-red-100'>
-  //   // <div className=' flex justify-between w-48'>
-  //   //   {match.sportName}
-  //   // </div>
-  //   // </div>
-  //   // </>
-  //   <>
-  //     {<div className='border-2 mx-2 mb-1 rounded border-red-400 p-2 bg-red-100'>
-  //        <div className=' flex justify-between w-48'>
-  //          <h3 className='font-bold text-black-800'>{match.sportName}</h3>
-  //          <ArrowPathIcon className="h-6 w-6 hover:rotate-90 transition-all ease-in-out" aria-hidden="true" onClick={()=> { fetchMatch(matchId)}}/>
-  //        </div>
-  //        <p className='text-sm text-gray-600'>{match.location}</p>
-  //         <p className='text-sm text-gray-600'>Date: {match.startsAt.slice(0,10)}</p>
-  //        <div className='flex flex-col my-2'>
-  //          <div className='flex justify-between mt-1'>
-  //            <p className='font-semibold'>{match.teams[0].name}</p>
-  //            <p className='font-semibold'>{match.score[match.teams[0].name]}</p>
-  //          </div>
-  //          <div className='flex justify-between'>
-  //            <p className='font-semibold'>{match.teams[1].name}</p>
-  //            <p className='font-semibold'>{match.score[match.teams[1].name]}</p>
-  //          </div>
-  //        </div>
-  //      </div>}
-  //   </>
-  // )
-
   return (
     <Transition appear show={true} as={Fragment}>
       <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" onClose={closeModal}>
@@ -97,6 +66,8 @@ export default function MatchId() {
             &#8203;
           </span>
           <Transition.Child as={Fragment}>
+
+            
             <div className="inline-block w-full max-w-3xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
               <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                 {match.name}
@@ -111,6 +82,12 @@ export default function MatchId() {
                 <p className="text-sm text-gray-500">
                   Date: {match.startsAt.slice(0,10)}
                 </p>
+                {match.teams.length > 0 && match.teams.map((team, index) => (
+              <div key={index} className='flex justify-between'>
+                <p className='font-semibold'>{team.name}</p>
+                <p className='font-semibold'>{match.score[team.name]}</p>
+              </div>
+            ))}
                 <div className="flex flex-col my-2">
                   <div className="flex justify-between mt-1">
                     {/* <p className="font-semibold">{match.teams[0].name}</p>

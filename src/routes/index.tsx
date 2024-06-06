@@ -9,6 +9,7 @@ import Notfound from "../pages/Notfound";
 
 import ArticleId from "../components/Articles/Article";
 import MatchId from "../components/Matches/Match";
+import Score from "../components/Matches/score.tsx";
 import Preferences from "../components/Preferences/index.tsx";
 import Landing from "../pages/landing";
 const Signin = React.lazy(() => import("../pages/signin"));
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       {
         path: "matches/:matchId",
         element: <MatchId />
+      },
+      {
+        path: "matches/score/:matchId",
+        element: <Score />
       },
       {
         path: "preferences",
