@@ -15,7 +15,10 @@ export default function Articles() {
 
   return (
     <div>
-      <h1 className="text-gray-900 font-bold mb-2 mt-4 ml-2 text-2xl">Articles</h1>
+      <br />
+      <div className="w-full flex flex-auto">
+        <h1 className="text-gray-900 font-bold mb-2 mt-2 mx-2 text-2xl">Articles</h1>
+      </div>
       <div className="mt-2 justify-between flex items-center w-full">
       <ErrorBoundary>
           <Suspense fallback={<div>Loading...</div>}>

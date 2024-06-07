@@ -1,6 +1,14 @@
-## It looks like this in local:
+SportSpot is a dynamic sports app that allows users to effortlessly track their favorite sports teams and live matches.
 
+## Tech Stack
+- React JS
+- TypeScript
+- Tailwind CSS
 
-## Screenshots:
-![Screenshot](/public/screenshots/1.png)
-![Screenshot](/public/screenshots/2.png)
+## Features
+- Users can view live scores of ongoing matches
+- Users can view upcoming matches
+- Users can view past matches
+- Users can view match details
+- Users can view articles related to sports
+- Users can filter matches and articles by their preferrences

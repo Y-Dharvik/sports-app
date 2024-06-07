@@ -33,7 +33,7 @@ const Appbar = () => {
                   <img
                     className="h-12 w-12 sm:h-14 sm:w-14 mr-2"
                     src="src/assets/logo.png"
-                    alt="Sports App"
+                    alt="SportSpot"
                   />
                 </div>
                 <div className="hidden md:block">

@@ -91,11 +91,11 @@ export default function LiveMatchList() {
 
   return (
     <div className="container mx-auto">
-      <div className="flex justify-end w-11/12 mx-auto my-4">
+      <div className="flex justify-end w-11/12 mx-auto my-2">
         <select
           name=""
           id=""
-          className="justify-between py-2 px-5 text-orange-600 bg-grey-400 rounded-lg"
+          className="justify-between  px-5 text-orange-600 bg-grey-400 rounded-lg"
         >
           {categories.map((category) => (
             <option
