@@ -33,7 +33,7 @@ const Landing = () => {
                 <div className="flex-shrink-0">
                   <img
                     className="h-12 w-12 sm:h-14 sm:w-14 mr-2"
-                    src="src/assets/logo.png"
+                    src="/public/assets/logo.avif"
                     alt="Sports App"
                   />
                 </div>
