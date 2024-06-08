@@ -32,7 +32,7 @@ const Appbar = () => {
                 <div className="flex-shrink-0">
                   <img
                     className="h-12 w-12 sm:h-14 sm:w-14 mr-2"
-                    src="public/assets/logo.avif"
+                    src="/assets/logo.avif"
                     alt="SportSpot"
                   />
                 </div>
