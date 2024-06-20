@@ -134,12 +134,12 @@ export default function LiveMatchList() {
                     Date: {match.endsAt.slice(0, 10)}
                   </p>
                   <div className="flex flex-row justify-left">
-              <Link to={`/account/matches/${match.id}`}>
+              <Link to={(authenticated) ? `/account/matches/${match.id}` : `/view/matches/${match.id}`}>
                 <p className="flex-col items-center px-1 py-1 text-red-500 hover:text-red-600">
                   Read more
                 </p>
               </Link>
-              <Link to={`/account/matches/score/${match.id}`}>
+              <Link to={(authenticated) ? `/account/matches/${match.id}` : `/view/matches/score/${match.id}`}>
                 <p className="flex-col items-center px-2 py-1 text-red-500 hover:text-red-600">
                   View Score
                 </p>

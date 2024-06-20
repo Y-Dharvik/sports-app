@@ -7,6 +7,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
 export default function MatchId() {
+  console.log('MatchId');
   const [match,setMatch] = useState<Match>({
     id: 0,
     sportName: '',

@@ -280,7 +280,7 @@ export default function ArticleList(){
                   </div>
                   <p className="text-gray-700 text-base">{article.summary}</p>
                   <br />
-                  <Link to={`/account/articles/${article.id}`}>
+                  <Link to={(authenticated) ? `/account/articles/${article.id}` : `/view/articles/${article.id}`}>
                     <button
                       id="readToggle"
                       style={{ marginLeft: "240px" }}

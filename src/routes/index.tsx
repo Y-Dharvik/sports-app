@@ -12,6 +12,7 @@ const MatchId = React.lazy(() => import("../components/Matches/Match.tsx"));
 const Score = React.lazy(() => import("../components/Matches/score.tsx"));
 const Preferences = React.lazy(() => import("../components/Preferences/index.tsx"));
 const Landing = React.lazy(() => import("../pages/landing"));
+const ViewLayout = React.lazy(() => import("../pages/landing/index.tsx"));
 const ChangePassword = React.lazy(() => import("../components/Profile/index.tsx"));
 const Signin = React.lazy(() => import("../pages/signin"));
 const Signup = React.lazy(() => import("../pages/signup"));
@@ -28,7 +29,7 @@ const checkAuth = () => {
     return <Navigate to="/account" replace />;    
     
   }else{
-    return <Landing />;
+    return <Navigate to="/view" replace />;
   }
 }
 
@@ -38,6 +39,46 @@ const router = createBrowserRouter([
     path: "/", 
     element: checkAuth(),
   },
+  {
+    path: "/view",
+    element: (
+        <ViewLayout />
+    ),
+    ErrorBoundary: () => <>Failed to load the page</>,
+    children: [
+      {
+        path: "articles/:articleId",
+        element: <ArticleId />
+      }, 
+      {
+        path: "matches/:matchId",
+        element: <MatchId />
+      },
+      {
+        path: "matches/score/:matchId",
+        element: <Score />
+      },
+    ],
+  },
+  // {
+  //   path : "/view",
+  //   element: <Landing />,
+  //   children: [
+  //     {
+  //       path: "articles/:articleId",
+  //       element: <ArticleId />
+  //     }, 
+  //     {
+  //       path: "matches/:matchId",
+  //       element: <MatchId />
+  //     },
+  //     {
+  //       path: "matches/score/:matchId",
+  //       element: <Score />
+  //     },
+  //   ]
+
+  // },
   {
     path: "/signin",
     element: <Signin />
