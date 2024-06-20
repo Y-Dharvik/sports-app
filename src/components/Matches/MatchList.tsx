@@ -71,7 +71,9 @@ export default function LiveMatchList() {
         match.teams.length > 1
           ? preferences.preferences.selectedTeams.includes(match.teams[1].name)
           : false;
-      let ans3 = preferences.preferences.selectedSports.includes(match.sportName);
+      let ans3 = preferences.preferences.selectedSports.includes(
+        match.sportName
+      );
       return ans1 || ans2 || ans3;
       // || preferences.preferredSport.includes(match.sportName);
     });
@@ -121,51 +123,46 @@ export default function LiveMatchList() {
           {filteredMatches.map((match: any) => {
             return (
               <div className="flex flex-col">
-              <div className="border-2 mx-2 mb-1 rounded border-red-400 p-2 bg-red-100 flex-auto flex-col flex-wrap">
+                <div className="border-2 mx-2 mb-1 rounded border-red-400 p-2 bg-red-100 flex-auto flex-col flex-wrap">
                   <div className=" flex justify-between w-48">
                     <h3 className="font-bold text-black-800">{match.name}</h3>
                     <ArrowPathIcon
                       className="h-6 w-6 hover:rotate-90 transition-all ease-in-out"
                       aria-hidden="true"
                     />
-                  </div>  
+                  </div>
                   <p className="text-sm text-gray-600">{match.location}</p>
                   <p className="text-sm text-gray-600">
                     Date: {match.endsAt.slice(0, 10)}
                   </p>
                   <div className="flex flex-row justify-left">
-              <Link to={(authenticated) ? `/account/matches/${match.id}` : `/view/matches/${match.id}`}>
-                <p className="flex-col items-center px-1 py-1 text-red-500 hover:text-red-600">
-                  Read more
-                </p>
-              </Link>
-              <Link to={(authenticated) ? `/account/matches/${match.id}` : `/view/matches/score/${match.id}`}>
-                <p className="flex-col items-center px-2 py-1 text-red-500 hover:text-red-600">
-                  View Score
-                </p>
-              </Link>
+                    <Link
+                      to={
+                        authenticated
+                          ? `/account/matches/${match.id}`
+                          : `/view/matches/${match.id}`
+                      }
+                    >
+                      <p className="flex-col items-center px-1 py-1 text-red-500 hover:text-red-600">
+                        Read more
+                      </p>
+                    </Link>
+                    <Link
+                      to={
+                        authenticated
+                          ? `/account/matches/${match.id}`
+                          : `/view/matches/score/${match.id}`
+                      }
+                    >
+                      <p className="flex-col items-center px-2 py-1 text-red-500 hover:text-red-600">
+                        View Score
+                      </p>
+                    </Link>
+                  </div>
+                </div>
               </div>
-                   
-                   
-                  {/* 
-                  <div className='flex flex-col my-2'>
-                    <div className='flex justify-between mt-1 px-2'>
-                      <p className='font-semibold'>{match.teams[0].name}</p>
-                      <p className='font-semibold'>{match.score[match.teams[0].name]}</p>
-                    </div>
-                    <div className='flex justify-between'>
-                      <p className='font-semibold'>{match.teams[1].name}</p>
-                      <p className='font-semibold'>{match.score[match.teams[1].name]}</p>
-                    </div>
-                  </div> */}
-                  
-              </div>
-              
-              </div>
-              
             );
           })}
-          
         </div>
       </div>
     </div>

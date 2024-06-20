@@ -2,8 +2,6 @@ import React from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
-// import Notfound from "../pages/Notfound";
-
 
 const Notfound = React.lazy(() => import("../pages/Notfound"));
 
@@ -11,7 +9,6 @@ const ArticleId = React.lazy(() => import("../components/Articles/Article.tsx"))
 const MatchId = React.lazy(() => import("../components/Matches/Match.tsx"));
 const Score = React.lazy(() => import("../components/Matches/score.tsx"));
 const Preferences = React.lazy(() => import("../components/Preferences/index.tsx"));
-const Landing = React.lazy(() => import("../pages/landing"));
 const ViewLayout = React.lazy(() => import("../pages/landing/index.tsx"));
 const ChangePassword = React.lazy(() => import("../components/Profile/index.tsx"));
 const Signin = React.lazy(() => import("../pages/signin"));
@@ -60,25 +57,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path : "/view",
-  //   element: <Landing />,
-  //   children: [
-  //     {
-  //       path: "articles/:articleId",
-  //       element: <ArticleId />
-  //     }, 
-  //     {
-  //       path: "matches/:matchId",
-  //       element: <MatchId />
-  //     },
-  //     {
-  //       path: "matches/score/:matchId",
-  //       element: <Score />
-  //     },
-  //   ]
-
-  // },
   {
     path: "/signin",
     element: <Signin />
@@ -125,12 +103,6 @@ const router = createBrowserRouter([
     ],
     
   },
-//       {
-//         path: "members",
-//         element: (<Members />)
-//       },
-//     ],
-//   },
   {
     path: "/notfound",
     element: <Notfound />

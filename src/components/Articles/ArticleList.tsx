@@ -105,33 +105,6 @@ export default function ArticleList(){
       }
     })
   }
-  // if(selectedFavSportCategory === "All"){
-  //   filteredFavouriteArticles = favouriteArticles.filter((article : Article) => {
-  //     return preferences.preferences.selectedSports.includes(article.sport.name)
-  //   })
-  // }else{
-  //   filteredFavouriteArticles = favouriteArticles.filter((article : Article) => {
-  //     return article.sport.name === selectedFavSportCategory;
-  //   })
-  // }
-
-  // if(selectedFavTeamCategory === "All"){
-  //   filteredFavouriteArticles = favouriteArticles.filter((article : Article) => {
-  //     if(article.teams.length === 1){
-  //       return preferences.preferences.selectedTeams.includes(article.teams[0].name)
-  //     }else{
-  //       return preferences.preferences.selectedTeams.includes(article.teams[0].name) || preferences.preferences.selectedTeams.includes(article.teams[1].name)
-  //     }
-  //   })
-  // }else{
-  //   filteredFavouriteArticles = favouriteArticles.filter((article : Article) => {
-  //     if(article.teams.length === 1){
-  //       return article.teams[0].name === selectedFavTeamCategory
-  //     }else{
-  //       return article.teams[0].name === selectedFavTeamCategory || article.teams[1].name === selectedFavTeamCategory
-  //     }
-  //   })
-  // }
 
   const handleFavSportCategoryChange = (category:any) => {
     setSelectedFavSportCategory(category);
@@ -167,25 +140,7 @@ export default function ArticleList(){
 
   const handleCategoryChange = (category:any) => {
     setSelectedCategory(category);
-    // if(selectedCategory === "All" ){
-    //   filteredArticles = articles;
-    //  }else if(selectedCategory === "Prefered Articles"){
-    //   filteredArticles = articles.filter((article : Article) => {
-    //     console.log("article.teams[0].name: ", article.teams[0].name);
-    //     console.log("article.teams[1].name: ", article.teams[1].name);
-    //     return preferences.preferredTeams.includes(article.teams[0].name || article.teams[1].name) 
-    //     // || preferences.preferredSport.includes(article.sport.name)
-    //   })
-    // }else{
-    //   filteredArticles = articles.filter((article : any) => {
-    //     return article.sport.name === selectedCategory;
-    //   })
-    // }
   };
-
-  // console.log("preferences.preferredTeams: ", preferences.preferredTeams);
-  // console.log("articles: ", articles);
-  // console.log("filteredArticles: ", filteredArticles);
 
   if (articles.length === 0 && isLoading) {
     return <span>Loading...</span>;
@@ -194,18 +149,6 @@ export default function ArticleList(){
   if (isError) {
     return <span>{errorMessage}</span>;
   }
-
-  // return (
-  //     <>
-  //         <div className="auto flex grid-cols-3 gap-2 p-2 lg:grid container mx-auto rounded-lg bg-gray-100">
-  //             {articles.map((article:any) => {
-  //                 return (
-  //                     <ArticleId key={article.id} id={article.id} />
-  //                 );
-  //             })}
-  //         </div>
-  //     </>
-  // );
 
   return (
     <div className="container auto flex gap-12">
