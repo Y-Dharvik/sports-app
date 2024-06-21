@@ -24,9 +24,9 @@ export default function ArticleList(){
   const preferencesState = usePreferencesState();
   const { preferences } = preferencesState;
 
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedSort, setSelectedSort] = useState("Sort By: Date");
-
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [selectedSort, setSelectedSort] = useState<string>("Sort By: Date");
+  
   const authenticated = !!localStorage.getItem("authToken");
   
   var categories = [
@@ -52,6 +52,7 @@ export default function ArticleList(){
       return article.sport.name === selectedCategory;
     })
   }
+  let sortedArticles = filteredArticles;
 
   let favouriteArticles = articles.filter((article : Article) => {
     if(article.teams.length !== 0){
@@ -62,9 +63,6 @@ export default function ArticleList(){
     }
   })
 
-
-  let reload = 0;
-  reload = reload + 1;
   const preferredSport = preferences.preferences.selectedSports
   const preferredTeams = preferences.preferences.selectedTeams  
   if(authenticated){
@@ -114,32 +112,34 @@ export default function ArticleList(){
     setSelectedFavTeamCategory(category);
   };
 
+  // if(selectedSort === "Sort By: Date"){
+  //   filteredArticles.sort((a: any, b: any) => {
+  //     return a.date - b.date;
+  //   })
+  // }else if(selectedSort === "Sort By: Title"){
+  //   filteredArticles.sort((a: any, b: any) => {
+  //     return a.title.localeCompare(b.title);
+  //   })
+  // }
+
   if(selectedSort === "Sort By: Date"){
-    filteredArticles.sort((a: any, b: any) => {
+    sortedArticles = filteredArticles.sort((a: any, b: any) => {
       return a.date - b.date;
     })
   }else if(selectedSort === "Sort By: Title"){
-    filteredArticles.sort((a: any, b: any) => {
+    sortedArticles = filteredArticles.sort((a: any, b: any) => {
       return a.title.localeCompare(b.title);
     })
   }
 
   const handleSortChange = (sort:any) => {
-    if(selectedSort === "Sort By: Date"){
-    filteredArticles.sort((a: any, b: any) => {
-      return a.date - b.date;
-    })
-  }else if(selectedSort === "Sort By: Title"){
-    filteredArticles.sort((a: any, b: any) => {
-      return a.title.localeCompare(b.title);
-    })
-  }
     setSelectedSort(sort);
   }
 
 
   const handleCategoryChange = (category:any) => {
     setSelectedCategory(category);
+    console.log("Selected Category in handle: ", category)
   };
 
   if (articles.length === 0 && isLoading) {
@@ -155,8 +155,8 @@ export default function ArticleList(){
     <div className="">
       <div className="flex justify-end w-11/12 mx-auto my-2">
         <select
-          name=""
-          id=""
+          value={selectedCategory}
+          onChange={(e) => handleCategoryChange(e.target.value)}
           className="justify-between py-2 px-5 text-orange-600 bg-grey-400 rounded-lg"
         >
           {categories.map((category) => (
@@ -174,8 +174,8 @@ export default function ArticleList(){
           ))}
         </select>
         <select
-          name=""
-          id=""
+          value={selectedSort}
+          onChange={(e) => handleSortChange(e.target.value)}
           className="justify-between py-2 px-5 text-orange-600 bg-grey-400 rounded-lg"
         >
           {sortCategories.map((sortCategory) => (
@@ -201,7 +201,7 @@ export default function ArticleList(){
         {filteredArticles.length === 0 && !isLoading && (
           <span>No articles available</span>
         )}
-        {filteredArticles.map((article: any) => {
+        {sortedArticles.map((article: any) => {
           return (
             <div className="flex-auto flex justify-center">
               <div className="max-w-sm rounded overflow-hidden shadow-lg flex-auto">
@@ -246,8 +246,8 @@ export default function ArticleList(){
 
         <label className="text-gray-700 text-base">Sport: </label>
         <select
-          name=""
-          id=""
+          value={selectedFavSportCategory}
+          onChange={(e) => handleFavSportCategoryChange(e.target.value)}
           className="justify-between py-2 px-5 text-orange-600 bg-grey-400 rounded-lg"
         >
           {favSportCategories.map((category1) => (
@@ -267,8 +267,8 @@ export default function ArticleList(){
         <div className="my-2">
         <label className="text-gray-700 text-base">   Team: </label>
         <select
-          name=""
-          id=""
+          value={selectedFavTeamCategory}
+          onChange={(e) => handleFavTeamCategoryChange(e.target.value)}
           className="justify-between py-2 px-5 text-orange-600 bg-grey-400 rounded-lg"
         >
           {favTeamCategories.map((category2) => (

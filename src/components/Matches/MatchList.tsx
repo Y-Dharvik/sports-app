@@ -63,7 +63,6 @@ export default function LiveMatchList() {
     filteredMatches = matches;
   } else if (selectedCategory === "Prefered Matches") {
     filteredMatches = matches.filter((match: Match) => {
-      // console.log("preferences: ", preferences);
       let ans1 = preferences.preferences.selectedTeams.includes(
         match.teams[0].name || match.teams[1].name
       );
@@ -75,13 +74,16 @@ export default function LiveMatchList() {
         match.sportName
       );
       return ans1 || ans2 || ans3;
-      // || preferences.preferredSport.includes(match.sportName);
     });
   } else {
     filteredMatches = matches.filter((match: any) => {
       return match.sportName === selectedCategory;
     });
   }
+
+  filteredMatches = filteredMatches.map((match: any) => {
+    return { ...match, key: match.id };
+  });
   if (matches.length === 0 && isLoading) {
     return <span>Loading...</span>;
   }
@@ -95,8 +97,8 @@ export default function LiveMatchList() {
     <div className="container mx-auto">
       <div className="flex justify-end w-11/12 mx-auto my-2">
         <select
-          name=""
-          id=""
+          value={selectedCategory}
+          onChange={(e) => handleCategoryChange(e.target.value)}
           className="justify-between  px-5 text-orange-600 bg-grey-400 rounded-lg"
         >
           {categories.map((category) => (
@@ -122,7 +124,7 @@ export default function LiveMatchList() {
         <div className="flex flex-row">
           {filteredMatches.map((match: any) => {
             return (
-              <div className="flex flex-col">
+              <div className="flex flex-col" key={match.id}>
                 <div className="border-2 mx-2 mb-1 rounded border-red-400 p-2 bg-red-100 flex-auto flex-col flex-wrap">
                   <div className=" flex justify-between w-48">
                     <h3 className="font-bold text-black-800">{match.name}</h3>

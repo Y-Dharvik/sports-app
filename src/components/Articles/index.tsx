@@ -10,7 +10,7 @@ export default function Articles() {
 
   useEffect(() => {
     fetchArticles(articleDispatch);
-    console.log("articleDispatch: ", articleDispatch)
+    // console.log("articleDispatch: ", articleDispatch)
   }, [articleDispatch]);
 
   return (
