@@ -3,11 +3,15 @@ import { Disclosure } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import LiveMatch from "../../components/Matches";
 import Articles from "../../components/Articles";
+import { usePreferencesDispatch } from "../../context/preferences/context";
+import {  setPreferences } from "../../context/preferences/action";
+import { initialPreferencesState } from "../../context/preferences/types";
 // const classNames = (...classes: string[]): string =>
 //   classes.filter(Boolean).join(" ");
 
 const Appbar = () => {
   const auth = !!localStorage.getItem("authToken");
+  const data = JSON.parse(localStorage.getItem("userData") || "{}");
   let navigation = [];
   if(auth){
     navigation = [
@@ -20,6 +24,15 @@ const Appbar = () => {
       { name: "Sign in", href: "/signin", current: false },
       { name: "Sign up", href: "/signup", current: false },
     ];
+  }
+
+  if (data.preferences.selectedSports && data.preferences.selectedTeams) {
+    const preferencesDispatch = usePreferencesDispatch();
+    setPreferences(preferencesDispatch, data.preferences);
+  }else{
+    const preferencesDispatch = usePreferencesDispatch();
+    const userPreferences = initialPreferencesState.preferences;
+    setPreferences(preferencesDispatch, userPreferences);
   }
 
   return (
