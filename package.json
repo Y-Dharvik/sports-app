@@ -11,7 +11,8 @@
     "coverage": "vitest run --coverage",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:run": "npm run dev & cypress run"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",
