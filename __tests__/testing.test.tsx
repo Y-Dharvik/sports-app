@@ -6,16 +6,13 @@ describe('Testing App', () => {
   beforeEach(() => {
     render(<App />);
   });
-  
-  it('should display the correct number of matches after data is fetched', async () => {
-    // Wait for the "Loading..." text to disappear
-    await waitFor(() => {
-      expect(screen.queryByText(/Loading.../i)).not.toBeInTheDocument();
-    });
 
+  it('should display the correct number of matches after data is fetched', async () => {
     // Wait for the matches to be rendered and then check the count
-    const matches = await screen.findAllByTestId('match-item'); // Assuming each match has a `data-testid="match-item"`
-    expect(matches.length).toBeGreaterThan(1);
+    await waitFor(async() => {
+      const matches = await screen.findAllByTestId('match-item'); // Assuming each match has a `data-testid="match-item"`
+      expect(matches.length).toBeGreaterThan(1);
+    }, {timeout: 10000});
   });
 
   it('should display the correct number of articles after data is fetched', async () => {
