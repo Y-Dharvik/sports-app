@@ -34,7 +34,7 @@ const Landing = () => {
                       key={item.name}
                       className="flex items-center px-3 py-2 bg-gray-700 hover:bg-gray-800 text-white font-semibold rounded-md focus:outline-none focus:shadow-outline-gray mt-4"
                     >
-                      <Link to={item.href}>{item.name}</Link>
+                      <Link to={item.href} data-testid={item.name.toLowerCase().replace(" ", "") + "-button"}>{item.name}</Link>
                     </button>
                   ))}
                 </div>

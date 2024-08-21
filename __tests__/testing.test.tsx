@@ -1,5 +1,5 @@
 import { expect, describe, it, beforeEach } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import App from '../src/App'
 
 describe('Testing App', () => {
@@ -29,4 +29,13 @@ describe('Testing App', () => {
       expect(element).toBeInTheDocument();
     }, {timeout: 10000});
   });
+
+  it('should open signin page when signin button is clicked', async () => {
+    const signinButton = screen.getByTestId('signin-button');
+    fireEvent.click(signinButton);
+    await waitFor(() => {
+      const signinPage = screen.getByTestId('signin-page');
+      expect(signinPage).toBeInTheDocument();
+    }, {timeout: 10000});
+  }, {timeout: 10000});
 });

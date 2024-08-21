@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "coverage": "vitest run --coverage",
     "test": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",
@@ -36,6 +37,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/ui": "^2.0.5",
     "autoprefixer": "^10.4.18",
+    "cypress": "^13.13.3",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",

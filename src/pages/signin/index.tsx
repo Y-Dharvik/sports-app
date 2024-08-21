@@ -7,9 +7,10 @@ const Signin: React.FC = () => {
   // And use it after the h1 tag
   const message = localStorage.getItem('message');
   localStorage.setItem('message', "");
+  console.log("sigin page message");
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-md">
+      <div className="max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-md" data-testid="signin-page">
         {message && <div className="text-center mt-4">
           <p className="text-sm text-red-600">{message}</p>
         </div>}

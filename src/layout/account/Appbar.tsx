@@ -37,7 +37,7 @@ const Appbar = () => {
 
   return (
     <>
-      <Disclosure as="nav" className="border-b border-slate-200">
+      <Disclosure as="nav" className="border-b border-slate-200" data-testid="auth-page">
         {() => (
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
