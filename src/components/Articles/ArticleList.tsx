@@ -143,7 +143,7 @@ export default function ArticleList(){
   };
 
   if (articles.length === 0 && isLoading) {
-    return <span>Loading...</span>;
+    return <span data-testid="loading">Loading...</span>
   }
 
   if (isError) {
@@ -203,7 +203,7 @@ export default function ArticleList(){
         )}
         {sortedArticles.map((article: any) => {
           return (
-            <div className="flex-auto flex justify-center">
+            <div className="flex-auto flex justify-center" data-testid="article-item">
               <div className="max-w-sm rounded overflow-hidden shadow-lg flex-auto">
                 <img
                   className="flex items-center justify-center h-48 w-full object-cover"
@@ -289,7 +289,7 @@ export default function ArticleList(){
       </div>
     <div className="flex flex-col gap-2 overflow-y-scroll max-h-[510px] grid-cols-1 gap-2 p-2 lg:grid container mx-auto rounded-lg bg-orange-200">
         {filteredFavouriteArticles.length === 0 && !isLoading && (
-          <span>No articles available</span>
+          <span data-testid="no-favart-item">No articles available</span>
         )}
         {filteredFavouriteArticles.map((article: any) => {
           return (

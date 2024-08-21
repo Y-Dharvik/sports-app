@@ -124,7 +124,7 @@ export default function LiveMatchList() {
         <div className="flex flex-row">
           {filteredMatches.map((match: any) => {
             return (
-              <div className="flex flex-col" key={match.id}>
+              <div className="flex flex-col" key={match.id} data-testid="match-item">
                 <div className="border-2 mx-2 mb-1 rounded border-red-400 p-2 bg-red-100 flex-auto flex-col flex-wrap">
                   <div className=" flex justify-between w-48">
                     <h3 className="font-bold text-black-800">{match.name}</h3>
