@@ -10,7 +10,7 @@ describe('Testing App', () => {
   it('should display the correct number of matches after data is fetched', async () => {
     // Wait for the matches to be rendered and then check the count
     await waitFor(async() => {
-      const matches = await screen.findAllByTestId('match-item'); // Assuming each match has a `data-testid="match-item"`
+      const matches = await screen.findAllByTestId('match-item'); // each match has a `data-testid="match-item"`
       expect(matches.length).toBeGreaterThan(1);
     }, {timeout: 10000});
   });
@@ -18,7 +18,7 @@ describe('Testing App', () => {
   it('should display the correct number of articles after data is fetched', async () => {
     // Wait for the articles to be rendered and then check the count
     await waitFor(async() => {
-      const articles = await screen.findAllByTestId('article-item'); // Assuming each article has a `data-testid="article-item"`
+      const articles = await screen.findAllByTestId('article-item'); // each article has a `data-testid="article-item"`
       expect(articles.length).toBeGreaterThan(1);
     }, {timeout: 10000});
   });

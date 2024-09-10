@@ -80,6 +80,7 @@ const Appbar = () => {
                   {navigation.map((item) => (
                     <button
                       key={item.name}
+                      data-testid={item.name + "-button"}
                       className="flex items-center px-3 py-2 bg-gray-700 hover:bg-gray-800 text-white font-semibold rounded-md focus:outline-none focus:shadow-outline-gray mt-4"
                     >
                       <Link to={item.href}>{item.name}</Link>

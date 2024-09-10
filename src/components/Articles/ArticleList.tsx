@@ -203,7 +203,7 @@ export default function ArticleList(){
         )}
         {sortedArticles.map((article: any) => {
           return (
-            <div className="flex-auto flex justify-center" data-testid="article-item">
+            <div className="flex-auto flex justify-center" data-testid="article-item" key={article.id}>
               <div className="max-w-sm rounded overflow-hidden shadow-lg flex-auto">
                 <img
                   className="flex items-center justify-center h-48 w-full object-cover"
@@ -247,6 +247,7 @@ export default function ArticleList(){
         <label className="text-gray-700 text-base">Sport: </label>
         <select
           value={selectedFavSportCategory}
+          data-testid="fav-sport-categories"
           onChange={(e) => handleFavSportCategoryChange(e.target.value)}
           className="justify-between py-2 px-5 text-orange-600 bg-grey-400 rounded-lg"
         >
