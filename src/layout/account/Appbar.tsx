@@ -6,18 +6,23 @@ import Articles from "../../components/Articles";
 import { usePreferencesDispatch } from "../../context/preferences/context";
 import {  setPreferences } from "../../context/preferences/action";
 import { initialPreferencesState } from "../../context/preferences/types";
-// const classNames = (...classes: string[]): string =>
-//   classes.filter(Boolean).join(" ");
+import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
 
 const Appbar = () => {
+  const {t, i18n} = useTranslation();
+  const [currLang, setCurrLang] = useState(() => i18n.language);
+  useEffect(() => {
+    i18n.changeLanguage(currLang);
+  }, [currLang, i18n]);
   const auth = !!localStorage.getItem("authToken");
   const data = JSON.parse(localStorage.getItem("userData") || "{}");
   let navigation = [];
   if(auth){
     navigation = [
-      { name: "Profile", href: "/account/profile", current: false },
-      { name: "Sign out", href: "/logout", current: false },
-      { name : "Preferences", href: "/account/preferences", current: false}
+      { name: t("Profile"), href: "/account/profile", current: false },
+      { name: t("Sign out"), href: "/logout", current: false },
+      { name : t("Preferences"), href: "/account/preferences", current: false}
     ];
   }else{
     navigation = [
@@ -86,9 +91,15 @@ const Appbar = () => {
                       <Link to={item.href}>{item.name}</Link>
                     </button>
                   ))}
-
-
-              
+                  <select
+                    className="px-3 py-2 bg-gray-700 hover:bg-gray-800 text-white font-semibold rounded-md focus:outline-none focus:shadow-outline-gray mt-4"
+                    onChange={(e) => setCurrLang(e.target.value)}
+                    value={currLang}
+                  >
+                    <option value="en">EN</option>
+                    <option value="de">DE</option>
+                  </select>
+                  
                 </div>
               </div>
             </div>

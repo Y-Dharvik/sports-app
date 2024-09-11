@@ -23,6 +23,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/index.tsx",  "**/*.ts", "**/*.tsx", "./vitest.setup.ts"],
+  "include": ["src", "src/index.tsx",  "**/*.ts", "**/*.tsx", "./vitest.setup.ts", "connectDB.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

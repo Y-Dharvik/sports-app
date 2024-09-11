@@ -7,8 +7,10 @@ import { useEffect, useState } from "react";
 import { FunnelIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { Article } from "../../context/articles/types";
+import { useTranslation } from "react-i18next";
 
 export default function ArticleList(){
+  const { t } = useTranslation();
   const articleDispatch = useArticlesDispatch();
   useEffect(() => {
     fetchArticles(articleDispatch);
@@ -242,7 +244,7 @@ export default function ArticleList(){
     <div>
     <div className="  w-11/11 mx-auto my-0">
         {/* Favourites */}
-        <h1 className="text-gray-900 font-bold mb-2 mt-0 ml-2 text-2xl mr-22 mx-9 allign-right">Favourites</h1>
+        <h1 className="text-gray-900 font-bold mb-2 mt-0 ml-2 text-2xl mr-22 mx-9 allign-right">{t("Favourites")}</h1>
 
         <label className="text-gray-700 text-base">Sport: </label>
         <select
