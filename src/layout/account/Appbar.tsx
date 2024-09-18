@@ -88,6 +88,9 @@ const Appbar = () => {
 
       </Disclosure>
       <h1 className="text-gray-900 font-bold mb-2 mt-4 ml-2 text-2xl">{t("Date & Time")}</h1>
+      <button onClick={() => {
+        throw new Error("Testing Error");
+      }} className="button">Error Button</button>
       <DateTimeLocal />
       <LiveMatch />
       <br />

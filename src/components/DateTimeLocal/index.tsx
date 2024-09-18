@@ -24,7 +24,6 @@ const DateTimeLocal = () => {
     }, [currTime, i18n.language]);
 
   return (
-    // dynamically update the time and date. The clock should be ticking every second
     <div className="flex flex-col">
       <div className="font-bold text-gray-700 px-2">
         {dFormatter.format(new Date())}
