@@ -8,13 +8,14 @@ import {  setPreferences } from "../../context/preferences/action";
 import { initialPreferencesState } from "../../context/preferences/types";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
+import DateTimeLocal from "../../components/DateTimeLocal";
 
 const Appbar = () => {
   const {t, i18n} = useTranslation();
   const [currLang, setCurrLang] = useState(() => i18n.language);
   useEffect(() => {
     i18n.changeLanguage(currLang);
-  }, [currLang, i18n]);
+  }, [currLang]);
   const auth = !!localStorage.getItem("authToken");
   const data = JSON.parse(localStorage.getItem("userData") || "{}");
   let navigation = [];
@@ -54,30 +55,6 @@ const Appbar = () => {
                     alt="SportSpot"
                   />
                 </div>
-                <div className="hidden md:block">
-                  {/* <div className="ml-10 flex items-baseline space-x-9">
-                    {navigation.map((item) => { 
-                      const isCurrent = pathname.includes(item.href)
-
-                      return (
-                        <Link
-                          key={item.name}
-                          to={item.href}
-                          className={classNames(
-                            isCurrent
-                              ? 'bg-slate-50 text-blue-700'
-                              : 'text-slate-500 hover:text-blue-600',
-                            'rounded-md px-3 py-2 text-sm font-medium'
-                          )}
-                          aria-current={isCurrent ? 'page' : undefined}
-                        >
-                          {item.name}
-                        </Link>
-                    )})}
-                  </div> */}
-
-
-                </div>
               </div>
 
               <div className="hidden md:block">
@@ -110,6 +87,8 @@ const Appbar = () => {
 
 
       </Disclosure>
+      <h1 className="text-gray-900 font-bold mb-2 mt-4 ml-2 text-2xl">{t("Date & Time")}</h1>
+      <DateTimeLocal />
       <LiveMatch />
       <br />
       <br />
