@@ -6,7 +6,7 @@ import { ArticlesProvider } from "./context/articles/context";
 import { PreferencesProvider } from "./context/preferences/context";
 import { SportProvider } from "./context/sports/context";
 import { TeamsProvider } from "./context/teams/context";
-
+import "./i18n"; 
 const App = () => {
   return (
     <div

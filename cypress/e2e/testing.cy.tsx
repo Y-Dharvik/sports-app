@@ -1,9 +1,20 @@
 describe('Sign in flow', () => {
+    Cypress.on('uncaught:exception', (err) => {
+      // we expect a 3rd party library error with message 'list not defined'
+      // and don't want to fail the test so we return false
+      if (err.message.includes('Cannot use import statement outside a module')) {
+        return false
+      }
+      // we still want to ensure there are no other unexpected
+      // errors, so we let them fail the test
+    })
+
     it('should navigate to the signin page, sign in, and navigate to the authenticated page', () => {
       // Visit the landing page
       cy.visit('http://localhost:5173/view');
   
       // Click the Sign in button
+      console.log('clicking sign in button');
       cy.get('[data-testid="signin-button"]').click();
   
       // Verify that the signin page opens

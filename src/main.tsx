@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { ThemeProvider } from "./context/theme.tsx";
-import './i18n.ts'
 import * as Sentry from "@sentry/react";
 
 Sentry.init({
