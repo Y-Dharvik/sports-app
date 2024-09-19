@@ -24,16 +24,41 @@ export default function ArticleId() {
   let navigate = useNavigate();
   let {articleId} = useParams();
   console.log("articleId in Article.tsx: ", articleId);
-  useEffect(() => {
-    fetchArticle(articleId);
-  }, [articleId]);
+  // const [otherArticles, setOtherArticles] = useState<Article[]>([]);
+
+  // const fetchOtherArticles = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:4000/article", {
+  //       method: "GET",
+  //       headers: { "Content-Type": "application/json" },
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error("Failed to fetch articles");
+  //     }
+
+  //     const data = await response.json();
+
+  //     setOtherArticles(data);
+  //   } catch (error) {
+  //     console.error("Failed to fetch articles:", error);
+  //   }
+  // }
 
   const fetchArticle = async (id: string | undefined) => {
     try {
-      const response = await fetch(`${API_ENDPOINT}/articles/${id}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
+      let response;
+      if(id && parseInt(id) < 99999) {
+        response = await fetch(`${API_ENDPOINT}/articles/${id}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+      } else {
+        response = await fetch(`http://localhost:4000/article/${id}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+      }
 
       if (!response.ok) {
         throw new Error("Failed to fetch article");
@@ -47,6 +72,17 @@ export default function ArticleId() {
       console.error("Sign-in failed:", error);
     }
   };
+
+  useEffect(() => {
+      fetchArticle(articleId);
+  }, [articleId]);
+
+  // if(articleId && parseInt(articleId) <99999) {
+  //   setArticle(otherArticles.find((article) => article.id === parseInt(articleId)) || articlee);
+  // }
+
+
+  
   
   const [, setOpenRead] = useState(false);
   function closeModal() {

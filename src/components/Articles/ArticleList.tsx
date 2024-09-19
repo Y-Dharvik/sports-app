@@ -30,6 +30,32 @@ export default function ArticleList(){
   const [selectedSort, setSelectedSort] = useState<string>("Sort By: Date");
   
   const authenticated = !!localStorage.getItem("authToken");
+
+  const [otherArticles, setOtherArticles] = useState<Article[]>([]);
+
+  const fetchOtherArticles = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/article", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch articles");
+      }
+
+      const data = await response.json();
+
+      setOtherArticles(data);
+    } catch (error) {
+      console.error("Failed to fetch articles:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchOtherArticles();
+  }, []);
+
   
   var categories = [
     "All",
@@ -38,7 +64,8 @@ export default function ArticleList(){
     "Rugby",
     "Field Hockey",
     "Table Tennis",
-    "Cricket"
+    "Cricket",
+    "Local Articles"
   ];
 
   const sortCategories = [
@@ -49,6 +76,8 @@ export default function ArticleList(){
   let filteredArticles;
    if(selectedCategory === "All" ){
     filteredArticles = articles;
+   }else if(selectedCategory === "Local Articles"){
+    filteredArticles = otherArticles;
    }else{
     filteredArticles = articles.filter((article : any) => {
       return article.sport.name === selectedCategory;
